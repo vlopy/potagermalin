@@ -1,0 +1,17 @@
+## First Time Setup
+* Install node from nvm: https://gist.github.com/d2s/372b5943bce17b964a79
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install --lts
+```
+* Install the node modules
+```
+npm install
+```
+
+* Start the Android Application
+```
+npx react-native run-android
+npm start
+(then press r to reload the app)
+```
