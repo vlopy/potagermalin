@@ -1,0 +1,77 @@
+[
+  {
+    "name": "tartanpion",
+    "family": "liliacées",
+    "sow": {
+      "directly_m": [
+        2,
+        3
+      ],
+      "incups_m": [],
+      "depth_cm": [
+        1,
+        2
+      ],
+      "plants_cm": 15,
+      "rows_cm": 15
+    },
+    "harvest": {
+      "after_j": [
+        240,
+        270
+      ],
+      "info": "arracher les plants et laisser sècher quelques jours"
+    }
+  },
+  {
+    "name": "ail",
+    "family": "liliacées",
+    "sow": {
+      "directly_m": [
+        10,
+        3
+      ],
+      "incups_m": [
+        3,
+        6
+      ],
+      "depth_cm": [
+        1,
+        2
+      ],
+      "plants_cm": 15,
+      "rows_cm": 15
+    },
+    "harvest": {
+      "after_j": [
+        240,
+        270
+      ],
+      "info": "arracher les plants et laisser sècher quelques jours"
+    }
+  },
+  {
+    "name": "arroche",
+    "family": "chénopodiacées",
+    "sow": {
+      "directly_m": [],
+      "incups_m": [
+        3,
+        9
+      ],
+      "depth_cm": [
+        1
+      ],
+      "rows_cm": 40
+    },
+    "thinning": {
+      "info": "4 feuilles",
+      "plants1_cm": 30
+    },
+    "harvest": {
+      "after_j": [
+        60
+      ]
+    }
+  }
+]

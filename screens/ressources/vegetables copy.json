@@ -1,46 +1,63 @@
-"legumes": {
-  "planche": {
-    "A": [ "Cucurbitacées", "Haricot", "Maïs", "Pois" ],
-    "B": [ "Chénopodiacées", "Crucifères" ],
-    "C": [ "Composées", "Fabacées", "Pomme de terre" ],
-    "D": [ "Liliacées", "Ombellifères", "Solanacées" ]
-  },
-  "Ail": {
-    "famille": "Liliacées",
+[
+  {
+    "name": "ail",
+    "famille": "liliacées",
     "semer": {
       "en terre": true,
-      "quand_m": [2, 3, 10, 11],
-      "profondeur_cm": [1, 2],
+      "quand_m": [
+        2,
+        3,
+        10,
+        11
+      ],
+      "profondeur_cm": [
+        1,
+        2
+      ],
       "interplant_cm": 15,
       "interrang_cm": 15
     },
     "recolter": {
-      "apres_j": [240, 270],
+      "apres_j": [
+        240,
+        270
+      ],
       "info": "arracher les plants et laisser sècher quelques jours"
     }
   },
-  "Arroche": {
-    "famille": "Chénopodiacées",
+  {
+    "name": "arroche",
+    "famille": "chénopodiacées",
     "semer": {
       "en terre": true,
-      "quand_m": [3, 9],
+      "quand_m": [
+        3,
+        9
+      ],
       "profondeur_cm": 1,
       "interrang_cm": 40
     },
     "eclaircir": {
       "info": "4 feuilles",
-      "interplant_cm": [30, 50]
+      "interplant_cm": [
+        30,
+        50
+      ]
     },
     "recolter": {
       "apres_j": 60
     }
   },
-  "Aubergine antigua": {
-    "famille": "Solanacées",
+  {
+    "name": "aubergine antigua",
+    "famille": "solanacées",
     "semer": {
       "en terre": false,
       "temperature": 24,
-      "quand_m": [2, 4],
+      "quand_m": [
+        2,
+        4
+      ],
       "info": "2 ou 3 graines par godet, on conserve le plus robuste des plants"
     },
     "planter": {
@@ -49,18 +66,21 @@
       "interrang_cm": 50,
       "info": "planter quand_m on ne craint plus les gelées"
     },
-    "tailler": {
-    },
+    "tailler": {},
     "recolter": {
       "comments": "recolter 5 mois après le semis",
       "apres_j": 150
     }
   },
-  "Carotte Orange de Colmar": {
-    "famille": "Ombellifères",
+  {
+    "name": "carotte orange de colmar",
+    "famille": "ombellifères",
     "semer": {
       "en terre": true,
-      "quand_m": [2, 7],
+      "quand_m": [
+        2,
+        7
+      ],
       "interrang_cm": 25
     },
     "eclaircir": {
@@ -71,12 +91,19 @@
       "apres_j": 150
     }
   },
-  "Courgette Caserta": {
-    "famille": "Cucurbitacées",
+  {
+    "name": "courgette caserta",
+    "famille": "cucurbitacées",
     "semer": {
       "en terre": false,
-      "quand_m": [3, 6],
-      "temperature": [18, 20]
+      "quand_m": [
+        3,
+        6
+      ],
+      "temperature": [
+        18,
+        20
+      ]
     },
     "planter": {
       "apres_m": 3,
@@ -87,12 +114,19 @@
       "apres_j": 90
     }
   },
-  "Haricot vert": {
-    "famille": "Fabacées",
+  {
+    "name": "haricot vert",
+    "famille": "fabacées",
     "semer": {
       "en terre": true,
-      "quand_m": [4, 7],
-      "profondeur_cm": [2, 3],
+      "quand_m": [
+        4,
+        7
+      ],
+      "profondeur_cm": [
+        2,
+        3
+      ],
       "interplant_cm": 8,
       "interrang_cm": 40
     },
@@ -101,12 +135,17 @@
     },
     "recolter": {
       "apres_j": 90
+    }
   },
-  "Maïs": {
-    "famille": "Poacées",
+  {
+    "name": "maïs",
+    "famille": "poacées",
     "semer": {
       "en terre": true,
-      "quand_m": [3, 6],
+      "quand_m": [
+        3,
+        6
+      ],
       "info": "après les gelées",
       "profondeur_cm": 3,
       "interplant_cm": 30,
@@ -116,27 +155,44 @@
       "info": "15-20 cm de haut"
     }
   },
-  "Radis d'hiver": {
-    "famille": "Crucifères",
+  {
+    "name": "radis d'hiver",
+    "famille": "crucifères",
     "semer": {
       "en terre": true,
-      "quand_m": [7, 8],
-      "profondeur_cm": [2, 3],
+      "quand_m": [
+        7,
+        8
+      ],
+      "profondeur_cm": [
+        2,
+        3
+      ],
       "interrang_cm": 30
     },
     "eclaircir": {
-      "interplant_cm": [10, 12]
+      "interplant_cm": [
+        10,
+        12
+      ]
     },
     "recolter": {
       "apres_j": 60
     }
   },
-  "Laitue romaine better devil": {
-    "famille": "Composées",
+  {
+    "name": "laitue romaine better devil",
+    "famille": "composées",
     "semer": {
       "en terre": false,
-      "temperature": [10, 18],
-      "quand_m": [2, 9]
+      "temperature": [
+        10,
+        18
+      ],
+      "quand_m": [
+        2,
+        9
+      ]
     },
     "planter": {
       "info": "4 feuilles",
@@ -145,17 +201,25 @@
       "apres_m": 1
     },
     "eclaircir": {
-      "interplant_cm": [10, 30]
+      "interplant_cm": [
+        10,
+        30
+      ]
     },
     "recolter": {
       "apres_j": 40
+    }
   },
-  "Salsifis": {
-    "famille": "Composées",
+  {
+    "name": "salsifis",
+    "famille": "composées",
     "semer": {
       "en terre": true,
       "interrang_cm": 25,
-      "profondeur_cm": [1, 2]
+      "profondeur_cm": [
+        1,
+        2
+      ]
     },
     "eclaircir": {
       "interplant_cm": 10
@@ -164,12 +228,19 @@
       "apres_j": 270
     }
   },
-  "Tomate": {
-    "famille": "Solanacées",
+  {
+    "name": "tomate",
+    "famille": "solanacées",
     "semer": {
       "en terre": false,
-      "quand_m": [2, 5],
-      "temperature": [16, 20]
+      "quand_m": [
+        2,
+        5
+      ],
+      "temperature": [
+        16,
+        20
+      ]
     },
     "planter": {
       "apres_m": 5,
@@ -181,4 +252,4 @@
       "info": "Supprimer les branches qui poussent aux embranchements"
     }
   }
-}
+]
