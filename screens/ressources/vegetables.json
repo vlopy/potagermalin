@@ -1,76 +1,264 @@
 [
   {
     "name": "tartanpion",
-    "family": "liliacées",
-    "sow": {
-      "directly_m": [
+    "family": "Astéracées",
+    "sowDirectly": {
+      "when_m": [
         2,
         3
       ],
-      "incups_m": [],
       "depth_cm": [
         1,
         2
       ],
-      "plants_cm": 15,
       "rows_cm": 15
     },
+    "thinning": {
+      "when_txt": "4 feuilles",
+      "plants1_cm": 30
+    },
     "harvest": {
-      "after_j": [
+      "after_d": [
         240,
         270
-      ],
-      "info": "arracher les plants et laisser sècher quelques jours"
+      ]
     }
   },
   {
     "name": "ail",
-    "family": "liliacées",
-    "sow": {
-      "directly_m": [
+    "family": "Brassicacées",
+    "sowDirectly": {
+      "when_m": [
         10,
         3
-      ],
-      "incups_m": [
-        3,
-        6
       ],
       "depth_cm": [
         1,
         2
       ],
-      "plants_cm": 15,
-      "rows_cm": 15
+      "rows_cm": 15,
+      "plants_cm": 15
+    },
+    "sowInCups": {
+      "when_m": [
+        10,
+        3
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1,
+        2
+      ],
+      "nb_seeds": [
+        1,
+        2
+      ]
+    },
+    "thinning": {
+      "when_txt": "2 feuilles puis 4 feuilles",
+      "plants1_cm": 3,
+      "plants2_cm": 8
     },
     "harvest": {
-      "after_j": [
-        240,
-        270
-      ],
-      "info": "arracher les plants et laisser sècher quelques jours"
+      "after_d": [
+        15,
+        50
+      ]
     }
   },
   {
     "name": "arroche",
     "family": "chénopodiacées",
-    "sow": {
-      "directly_m": [],
-      "incups_m": [
+    "sowInCups": {
+      "when_m": [
         3,
         9
       ],
+      "before_d": 42,
       "depth_cm": [
         1
       ],
-      "rows_cm": 40
+      "nb_seeds": [
+        4,
+        5
+      ]
     },
-    "thinning": {
-      "info": "4 feuilles",
-      "plants1_cm": 30
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
     },
     "harvest": {
-      "after_j": [
-        60
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "arrochddse",
+    "family": "Apiacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "arrdqoche",
+    "family": "Solanacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "acxwrroche",
+    "family": "poacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "arrocvcxhe",
+    "family": "liliacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "arrocvcvhe",
+    "family": "fabacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
+      ]
+    }
+  },
+  {
+    "name": "arrochexx",
+    "family": "cucurbitacées",
+    "sowInCups": {
+      "when_m": [
+        3,
+        9
+      ],
+      "before_d": 42,
+      "depth_cm": [
+        1
+      ],
+      "nb_seeds": [
+        4,
+        5
+      ]
+    },
+    "planting": {
+      "when_txt": "4 feuilles",
+      "rows_cm": 40,
+      "plants_cm": 30
+    },
+    "harvest": {
+      "after_d": [
+        40
       ]
     }
   }
