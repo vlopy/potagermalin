@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import VegetableList from "./ressources/vegetables.json";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import YearSelector from "./YearSelector";
 
 const styles = StyleSheet.create({
   "vegetable": {
@@ -18,6 +20,7 @@ enum vegeFamily {
 }
  */
 
+/**** Types ****/
 type Vegetable = {
   name: string,
   family: string,
@@ -47,6 +50,9 @@ type Vegetable = {
     after_d: number[]
   }
 }
+
+/**** Global Variables ****/
+export const fileSuffix = "-selectedVegetables";
 
 /**** Functions ****/
 const monthFromNumber = (monthNB: number): string => {
@@ -278,41 +284,65 @@ const VegetableDescription = (vege: Vegetable) => {
   )
 }
 
-const ColorButton = () => {
-  const defaultColor = "#D1D9D5";
-  const defaultText = "Sélectionner";
-  const defaultTextColor = "#686868";
-  const [myColor, setMyColor] = useState(defaultColor);
-  const [myText, setMyText] = useState(defaultText);
-  const [myTextColor, setMyTextColor] = useState(defaultTextColor);
+const ColorButton = (props: { vegeArg: Vegetable, year: number }) => {
+  const [isSelected, setIsSelected] = useState(false);
+  const vege = props.vegeArg;
+  let vegetableList: string[] = [];
 
-  const selectVegetable = () => {
-    if (myColor == defaultColor) {
-      // The vegetable is selected
-      setMyColor("#4B7E59");
-      setMyText("Retirer");
-      setMyTextColor("white");
-    } else {
-      // The vegetable is removed from the selection
-      setMyColor(defaultColor);
-      setMyText(defaultText);
-      setMyTextColor(defaultTextColor);
+  useEffect(() => {
+    const initButton = async (year: number) => {
+      const selectedJSON = await AsyncStorage.getItem(year + fileSuffix);
+      if (selectedJSON !== null) {
+        vegetableList = JSON.parse(selectedJSON)["selected"];
+        console.log(vege.name + "(" + props.year + "): " + vegetableList);
+        if (vegetableList.includes(vege.name)) {
+          setIsSelected(true);
+        } else {
+          setIsSelected(false);
+        }
+      }
     }
+
+    initButton(props.year);
+  });
+
+
+  const selectVegetable = async () => {
+    if (isSelected) {
+      setIsSelected(false);
+      const idx = vegetableList.indexOf(vege.name);
+      vegetableList.splice(idx, 1);
+    } else {
+      setIsSelected(true);
+      vegetableList.push(vege.name);
+    }
+    console.log(vege.name + ": setItem");
+    AsyncStorage.setItem(props.year + fileSuffix, JSON.stringify({ "selected": vegetableList }));
   }
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: myColor, margin: 2 }}>
-      <Pressable onPress={() => selectVegetable()}>
-        <Text style={{ color: myTextColor }}>{myText}</Text>
-      </Pressable>
-    </View>
-  );
+
+  if (isSelected) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#4B7E59", margin: 2 }}>
+        <Pressable onPress={() => selectVegetable()}>
+          <Text style={{ color: "white" }}>Retirer</Text>
+        </Pressable>
+      </View>
+    );
+  } else {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#D1D9D5", margin: 2 }}>
+        <Pressable onPress={() => selectVegetable()}>
+          <Text style={{ color: "#686868" }}>Sélectionner</Text>
+        </Pressable>
+      </View>
+    );
+  }
 }
 
-const VegetableView = (props: { vegeArg: Vegetable }) => {
+const VegetableView = (props: { vegeArg: Vegetable, year: number }) => {
   const [isExpanded, setExpanded] = useState(false);
   const vege = props.vegeArg;
   let bgColor;
-
   switch (vege.family.toLowerCase()) {
     case "apiacées":
       bgColor = "#FFD8C8";
@@ -353,8 +383,7 @@ const VegetableView = (props: { vegeArg: Vegetable }) => {
             <Text>{vege.name}</Text>
             <Text>{vege.family}</Text>
           </View>
-          <ColorButton />
-
+          <ColorButton vegeArg={vege} year={props.year} />
         </View>
       </Pressable >
       {isExpanded &&
@@ -366,15 +395,18 @@ const VegetableView = (props: { vegeArg: Vegetable }) => {
   );
 }
 
-
 const Selection = () => {
+  const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState(currentYear);
+
   const renderItem = ({ item }: { item: Vegetable }) => (
-    <VegetableView vegeArg={item} />
+    <VegetableView vegeArg={item} year={selectedYear} />
   );
 
   return (
     <View style={{ flex: 1 }}>
-      <Text>Les légumes de ton jardin en 2020</Text>
+      <Text>Les légumes de ton jardin</Text>
+      <YearSelector setYear={setSelectedYear} />
       <FlatList<Vegetable>
         data={VegetableList}
         renderItem={renderItem}
