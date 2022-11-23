@@ -4,6 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import VegetableList from "./ressources/vegetables.json";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import YearSelector from "./YearSelector";
+import { getSelectedVegetablesKey, T_Vegetable } from "./TypesAndConst";
 
 const styles = StyleSheet.create({
   "vegetable": {
@@ -12,47 +13,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }
 });
-
-/* Family Names
-enum vegeFamily {
-  Asteraceae, Brassicaceae, Chenopodiaceae, Cucurbitaceae, Fabaceae,
-  Liliaceae, Poaceae, Solanaceae, Umbelliferae
-}
- */
-
-/**** Types ****/
-type Vegetable = {
-  name: string,
-  family: string,
-  sowDirectly?: {
-    when_m: number[],
-    depth_cm: number[],
-    rows_cm: number,
-    plants_cm?: number
-  },
-  thinning?: {
-    when_txt: string,
-    plants1_cm: number,
-    plants2_cm?: number
-  },
-  sowInCups?: {
-    when_m: number[],
-    before_d: number,
-    depth_cm: number[],
-    nb_seeds: number[]
-  },
-  planting?: {
-    when_txt: string,
-    plants_cm: number,
-    rows_cm: number
-  }
-  harvest: {
-    after_d: number[]
-  }
-}
-
-/**** Global Variables ****/
-export const fileSuffix = "-selectedVegetables";
 
 /**** Functions ****/
 const monthFromNumber = (monthNB: number): string => {
@@ -84,7 +44,7 @@ const daysFormatter = (days: number) => {
 }
 
 /**** Components ****/
-const Harvest = (props: { vegeArg: Vegetable }) => {
+const Harvest = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.harvest.after_d.length == 1) {
@@ -114,7 +74,7 @@ const Harvest = (props: { vegeArg: Vegetable }) => {
   }
 }
 
-const Planting = (props: { vegeArg: Vegetable }) => {
+const Planting = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.planting !== undefined) {
@@ -146,7 +106,7 @@ const Planting = (props: { vegeArg: Vegetable }) => {
   }
 }
 
-const SowInCups = (props: { vegeArg: Vegetable }) => {
+const SowInCups = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.sowInCups !== undefined) {
@@ -174,7 +134,7 @@ const SowInCups = (props: { vegeArg: Vegetable }) => {
     );
   }
 }
-const Thinning = (props: { vegeArg: Vegetable }) => {
+const Thinning = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.thinning !== undefined) {
@@ -213,7 +173,7 @@ const Thinning = (props: { vegeArg: Vegetable }) => {
   }
 }
 
-const RowSpacing = (props: { vegeArg: Vegetable }) => {
+const RowSpacing = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.sowDirectly !== undefined) {
@@ -245,7 +205,7 @@ const RowSpacing = (props: { vegeArg: Vegetable }) => {
   }
 }
 
-const SowDirectly = (props: { vegeArg: Vegetable }) => {
+const SowDirectly = (props: { vegeArg: T_Vegetable }) => {
   const vege = props.vegeArg;
 
   if (vege.sowDirectly !== undefined) {
@@ -274,7 +234,7 @@ const SowDirectly = (props: { vegeArg: Vegetable }) => {
   }
 }
 
-const VegetableDescription = (vege: Vegetable) => {
+const VegetableDescription = (vege: T_Vegetable) => {
   return (
     <View>
       {vege.sowDirectly !== undefined && <SowDirectly vegeArg={vege} />}
@@ -284,14 +244,15 @@ const VegetableDescription = (vege: Vegetable) => {
   )
 }
 
-const ColorButton = (props: { vegeArg: Vegetable, year: number }) => {
+const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
   const [isSelected, setIsSelected] = useState(false);
   const vege = props.vegeArg;
   let vegetableList: string[] = [];
 
   useEffect(() => {
     const initButton = async (year: number) => {
-      const selectedJSON = await AsyncStorage.getItem(year + fileSuffix);
+      //AsyncStorage.clear();
+      const selectedJSON = await AsyncStorage.getItem(getSelectedVegetablesKey(year));
       if (selectedJSON !== null) {
         vegetableList = JSON.parse(selectedJSON)["selected"];
         console.log(vege.name + "(" + props.year + "): " + vegetableList);
@@ -317,7 +278,7 @@ const ColorButton = (props: { vegeArg: Vegetable, year: number }) => {
       vegetableList.push(vege.name);
     }
     console.log(vege.name + ": setItem");
-    AsyncStorage.setItem(props.year + fileSuffix, JSON.stringify({ "selected": vegetableList }));
+    AsyncStorage.setItem(getSelectedVegetablesKey(props.year), JSON.stringify({ "selected": vegetableList }));
   }
 
   if (isSelected) {
@@ -339,7 +300,7 @@ const ColorButton = (props: { vegeArg: Vegetable, year: number }) => {
   }
 }
 
-const VegetableView = (props: { vegeArg: Vegetable, year: number }) => {
+const VegetableView = (props: { vegeArg: T_Vegetable, year: number }) => {
   const [isExpanded, setExpanded] = useState(false);
   const vege = props.vegeArg;
   let bgColor;
@@ -399,15 +360,15 @@ const Selection = () => {
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState(currentYear);
 
-  const renderItem = ({ item }: { item: Vegetable }) => (
+  const renderItem = ({ item }: { item: T_Vegetable }) => (
     <VegetableView vegeArg={item} year={selectedYear} />
   );
 
   return (
     <View style={{ flex: 1 }}>
       <Text>Les légumes de ton jardin</Text>
-      <YearSelector setYear={setSelectedYear} />
-      <FlatList<Vegetable>
+      <YearSelector fileSuffixArg={getSelectedVegetablesKey(selectedYear)} setYear={setSelectedYear} />
+      <FlatList<T_Vegetable>
         data={VegetableList}
         renderItem={renderItem}
         keyExtractor={item => item.name}

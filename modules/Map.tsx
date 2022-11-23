@@ -3,6 +3,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { GestureResponderEvent } from "react-native-modal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { T_Bed } from "./TypesAndConst";
 
 const styles = StyleSheet.create({
   fullpage: {
@@ -60,19 +61,6 @@ const styles = StyleSheet.create({
   }
 });
 
-type Bed = {
-  //Number to identify the bed
-  id: number;
-  // The horizontal lenght in cm
-  hLength: number;
-  // The vertical length in cm
-  vLenght: number;
-  // The x coordinate
-  x: number;
-  // The y coordinate
-  y: number;
-};
-
 const Map = () => {
   // Modal panels
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -88,7 +76,7 @@ const Map = () => {
   const [InfoWidth, setInfoWidth] = useState("");
   const [InfoHeight, setInfoHeight] = useState("");
   // The existing beds
-  const [beds, setBeds] = useState<Bed[]>([]);
+  const [beds, setBeds] = useState<T_Bed[]>([]);
   // Counter to create unique identifier for the beds
   const [bedCounter, setBedCounter] = useState(0);
   // Convert the real bed dimensions in cm to the rectangle dimensions in pixels
@@ -122,7 +110,7 @@ const Map = () => {
 
     try {
       const bedsJson = await AsyncStorage.getItem("beds");
-      let existingBeds: Bed[];
+      let existingBeds: T_Bed[];
       if (bedsJson == null) {
         existingBeds = [];
       } else {
@@ -137,7 +125,7 @@ const Map = () => {
     setIsFormVisible(false);
   };
 
-  const getBedFromId = async (bedId: number): Promise<Bed | null> => {
+  const getBedFromId = async (bedId: number): Promise<T_Bed | null> => {
     try {
       const bedArrayJson = await AsyncStorage.getItem("beds");
       if (bedArrayJson !== null) {
@@ -169,7 +157,7 @@ const Map = () => {
     const bedsJson = await AsyncStorage.getItem("beds");
     if (bedsJson !== null) {
       let foundId = null;
-      const bedArray: Bed[] = JSON.parse(bedsJson);
+      const bedArray: T_Bed[] = JSON.parse(bedsJson);
       for (let i = 0; i < bedArray.length; i++) {
         if (bedArray[i].id == id) {
           foundId = i;

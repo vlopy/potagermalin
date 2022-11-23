@@ -11,11 +11,11 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import React from 'react';
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Map from "./screens/Map";
-import Selection from "./screens/Selection";
-import Calendar from "./screens/Calendar";
-import Information from "./screens/Information";
-import Harvest from "./screens/Harvest";
+import Map from "./modules/Map";
+import Selection from "./modules/Selection";
+import Calendar from "./modules/Calendar";
+import Harvest from "./modules/Harvest";
+import BedOrganization from "./modules/BedOrganization";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,9 +24,9 @@ const App = () => {
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Plan du jardin" component={Map} />
-        <Drawer.Screen name="Selection des légumes" component={Selection} />
+        <Drawer.Screen name="Sélection des légumes" component={Selection} />
+        <Drawer.Screen name="Répartition des légumes" component={BedOrganization} />
         <Drawer.Screen name="Entretien du jardin" component={Calendar} />
-        <Drawer.Screen name="Information sur les légumes" component={Information} />
         <Drawer.Screen name="Ta récolte" component={Harvest} />
       </Drawer.Navigator>
     </NavigationContainer>

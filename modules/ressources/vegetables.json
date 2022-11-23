@@ -1,7 +1,7 @@
 [
   {
     "name": "tartanpion",
-    "family": "Astéracées",
+    "family": "astéracées",
     "sowDirectly": {
       "when_m": [
         2,
@@ -26,7 +26,7 @@
   },
   {
     "name": "ail",
-    "family": "Brassicacées",
+    "family": "brassicacées",
     "sowDirectly": {
       "when_m": [
         10,
@@ -96,7 +96,7 @@
   },
   {
     "name": "arrochddse",
-    "family": "Apiacées",
+    "family": "apiacées",
     "sowInCups": {
       "when_m": [
         3,
@@ -124,7 +124,7 @@
   },
   {
     "name": "arrdqoche",
-    "family": "Solanacées",
+    "family": "solanacées",
     "sowInCups": {
       "when_m": [
         3,

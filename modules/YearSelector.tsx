@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { fileSuffix } from "./Selection"
 
 const styles = StyleSheet.create({
     container: {
@@ -44,10 +43,11 @@ const styles = StyleSheet.create({
     },
 });
 
-const YearSelector = (props: { setYear: (year: number) => void }) => {
+const YearSelector = (props: { fileSuffixArg: string, setYear: (year: number) => void }) => {
     let [years, setYears] = useState<string[]>([]);
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+    const fileSuffix = props.fileSuffixArg;
 
     const renderLabel = () => {
         if (value || isFocus) {

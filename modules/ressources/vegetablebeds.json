@@ -1,0 +1,22 @@
+{
+    "A": [
+        "cucurbitacées",
+        "haricot",
+        "maïs",
+        "pois"
+    ],
+    "B": [
+        "chénopodiacées",
+        "crucifères"
+    ],
+    "C": [
+        "composées",
+        "fabacées",
+        "pomme de terre"
+    ],
+    "D": [
+        "liliacées",
+        "ombellifères",
+        "solanacées"
+    ]
+}
