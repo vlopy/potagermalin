@@ -1,6 +1,6 @@
 [
   {
-    "name": "tartanpion",
+    "name": "artichaut",
     "family": "astéracées",
     "sowDirectly": {
       "when_m": [
@@ -95,7 +95,7 @@
     }
   },
   {
-    "name": "arrochddse",
+    "name": "tomate",
     "family": "apiacées",
     "sowInCups": {
       "when_m": [
@@ -123,7 +123,7 @@
     }
   },
   {
-    "name": "arrdqoche",
+    "name": "carotte",
     "family": "solanacées",
     "sowInCups": {
       "when_m": [
@@ -151,7 +151,7 @@
     }
   },
   {
-    "name": "acxwrroche",
+    "name": "paprika",
     "family": "poacées",
     "sowInCups": {
       "when_m": [
@@ -179,7 +179,7 @@
     }
   },
   {
-    "name": "arrocvcxhe",
+    "name": "celeri",
     "family": "liliacées",
     "sowInCups": {
       "when_m": [
@@ -207,7 +207,7 @@
     }
   },
   {
-    "name": "arrocvcvhe",
+    "name": "bettrave",
     "family": "fabacées",
     "sowInCups": {
       "when_m": [
@@ -235,7 +235,7 @@
     }
   },
   {
-    "name": "arrochexx",
+    "name": "cornichon",
     "family": "cucurbitacées",
     "sowInCups": {
       "when_m": [
