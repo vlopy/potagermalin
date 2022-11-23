@@ -48,22 +48,17 @@ export type T_Vegetable = {
     }
 }
 
-/**** Global Constants ****/
 // The storage key that leads to the list of the beds
-const BED_LIST = "beds";
-// The storage key that leads to the list of the selected vegetables
-const SELECTED_VEGETABLES = "YEAR-selectedVegetables";
-// The storage key that leads to the list of vegetables associated to the beds
-const BED_COMPOSITION = "YEAR-bedCompositions";
-
 export const getBedListKey = (): string => {
-    return BED_LIST;
+    return "beds";
 }
 
+// The storage key that leads to the list of the selected vegetables
 export const getSelectedVegetablesKey = (year: number) => {
-    return SELECTED_VEGETABLES.replace("YEAR", String(year));
+    return "YEAR-selectedVegetables".replace("YEAR", String(year));
 }
 
+// The storage key that leads to the list of vegetables associated to the beds
 export const getBedCompositionKey = (year: number) => {
-    return BED_COMPOSITION.replace("YEAR", String(year));
+    return "YEAR-bedCompositions".replace("YEAR", String(year));
 }

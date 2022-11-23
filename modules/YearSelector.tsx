@@ -43,11 +43,12 @@ const styles = StyleSheet.create({
     },
 });
 
-const YearSelector = (props: { fileSuffixArg: string, setYear: (year: number) => void }) => {
+const YearSelector = (props: { keyArg: string, setYear: (year: number) => void }) => {
     let [years, setYears] = useState<string[]>([]);
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
-    const fileSuffix = props.fileSuffixArg;
+    // Remove the first 4 characters, e.g., the year
+    const keySuffix = props.keyArg.slice(4);
 
     const renderLabel = () => {
         if (value || isFocus) {
@@ -64,12 +65,12 @@ const YearSelector = (props: { fileSuffixArg: string, setYear: (year: number) =>
         const initYears = async () => {
             const currentYear = new Date().getFullYear();
             let existingYears = [];
-            const storageKeys = (await AsyncStorage.getAllKeys()).filter(key => key.endsWith(fileSuffix));
+            const storageKeys = (await AsyncStorage.getAllKeys()).filter(key => key.endsWith(keySuffix));
             // Create files for the different years
             for (let y = currentYear - 1; y < currentYear + 2; y++) {
                 existingYears.push(String(y));
-                if (!storageKeys.includes(y + fileSuffix)) {
-                    await AsyncStorage.setItem(y + fileSuffix, "{\"selected\": []}");
+                if (!storageKeys.includes(y + keySuffix)) {
+                    await AsyncStorage.setItem(y + keySuffix, "{\"selected\": []}");
                 }
             }
             setYears(existingYears);

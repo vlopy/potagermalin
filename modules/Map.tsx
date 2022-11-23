@@ -174,7 +174,7 @@ const Map = () => {
 
   useEffect(() => {
     const initBeds = async () => {
-      // AsyncStorage.clear();
+      //AsyncStorage.clear();
       const bedsJson = await AsyncStorage.getItem("beds");
       if (bedsJson !== null) {
         const bedArray = JSON.parse(bedsJson);

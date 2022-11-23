@@ -43,7 +43,7 @@ const BedOrganization = () => {
   return (
     <View style={{ flex: 1 }}>
       <Text>Répartition des légumes dans tes planches</Text>
-      <YearSelector fileSuffixArg={getBedCompositionKey(selectedYear)} setYear={setSelectedYear} />
+      <YearSelector keyArg={getBedCompositionKey(selectedYear)} setYear={setSelectedYear} />
     </View>
   )
 }

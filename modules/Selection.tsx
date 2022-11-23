@@ -249,18 +249,22 @@ const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
   const vege = props.vegeArg;
   let vegetableList: string[] = [];
 
+  const updateVegetableList = async (year: number) => {
+    //AsyncStorage.clear();
+    const selectedJSON = await AsyncStorage.getItem(getSelectedVegetablesKey(year));
+    if (selectedJSON !== null) {
+      vegetableList = JSON.parse(selectedJSON)["selected"];
+      console.log(vege.name + "(" + props.year + "): " + vegetableList);
+    }
+  }
+
   useEffect(() => {
     const initButton = async (year: number) => {
-      //AsyncStorage.clear();
-      const selectedJSON = await AsyncStorage.getItem(getSelectedVegetablesKey(year));
-      if (selectedJSON !== null) {
-        vegetableList = JSON.parse(selectedJSON)["selected"];
-        console.log(vege.name + "(" + props.year + "): " + vegetableList);
-        if (vegetableList.includes(vege.name)) {
-          setIsSelected(true);
-        } else {
-          setIsSelected(false);
-        }
+      await updateVegetableList(year);
+      if (vegetableList.includes(vege.name)) {
+        setIsSelected(true);
+      } else {
+        setIsSelected(false);
       }
     }
 
@@ -269,6 +273,7 @@ const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
 
 
   const selectVegetable = async () => {
+    await updateVegetableList(props.year);
     if (isSelected) {
       setIsSelected(false);
       const idx = vegetableList.indexOf(vege.name);
@@ -367,7 +372,7 @@ const Selection = () => {
   return (
     <View style={{ flex: 1 }}>
       <Text>Les légumes de ton jardin</Text>
-      <YearSelector fileSuffixArg={getSelectedVegetablesKey(selectedYear)} setYear={setSelectedYear} />
+      <YearSelector keyArg={getSelectedVegetablesKey(selectedYear)} setYear={setSelectedYear} />
       <FlatList<T_Vegetable>
         data={VegetableList}
         renderItem={renderItem}
