@@ -6,13 +6,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import YearSelector from "./YearSelector";
 import { getSelectedVegetablesKey, T_Vegetable } from "./TypesAndConst";
 
-const styles = StyleSheet.create({
-  "vegetable": {
-    marginTop: 10,
-    fontSize: 16,
-    alignItems: "center",
+const styles = StyleSheet.create(
+  {
+    "vegetable": {
+      marginTop: 10,
+      fontSize: 16,
+      alignItems: "center",
+    }
   }
-});
+);
 
 /**** Functions ****/
 const monthFromNumber = (monthNB: number): string => {
@@ -244,52 +246,11 @@ const VegetableDescription = (vege: T_Vegetable) => {
   )
 }
 
-const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const vege = props.vegeArg;
-  let vegetableList: string[] = [];
-
-  const updateVegetableList = async (year: number) => {
-    //AsyncStorage.clear();
-    const selectedJSON = await AsyncStorage.getItem(getSelectedVegetablesKey(year));
-    if (selectedJSON !== null) {
-      vegetableList = JSON.parse(selectedJSON)["selected"];
-      console.log(vege.name + "(" + props.year + "): " + vegetableList);
-    }
-  }
-
-  useEffect(() => {
-    const initButton = async (year: number) => {
-      await updateVegetableList(year);
-      if (vegetableList.includes(vege.name)) {
-        setIsSelected(true);
-      } else {
-        setIsSelected(false);
-      }
-    }
-
-    initButton(props.year);
-  });
-
-
-  const selectVegetable = async () => {
-    await updateVegetableList(props.year);
-    if (isSelected) {
-      setIsSelected(false);
-      const idx = vegetableList.indexOf(vege.name);
-      vegetableList.splice(idx, 1);
-    } else {
-      setIsSelected(true);
-      vegetableList.push(vege.name);
-    }
-    console.log(vege.name + ": setItem");
-    AsyncStorage.setItem(getSelectedVegetablesKey(props.year), JSON.stringify({ "selected": vegetableList }));
-  }
-
-  if (isSelected) {
+const ColorButton = (props: { vege: T_Vegetable, isSelected: boolean, selectVegetable: (vegetableName: string) => void }) => {
+  if (props.isSelected) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#4B7E59", margin: 2 }}>
-        <Pressable onPress={() => selectVegetable()}>
+        <Pressable onPress={() => props.selectVegetable(props.vege.name)}>
           <Text style={{ color: "white" }}>Retirer</Text>
         </Pressable>
       </View>
@@ -297,7 +258,7 @@ const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
   } else {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#D1D9D5", margin: 2 }}>
-        <Pressable onPress={() => selectVegetable()}>
+        <Pressable onPress={() => props.selectVegetable(props.vege.name)}>
           <Text style={{ color: "#686868" }}>Sélectionner</Text>
         </Pressable>
       </View>
@@ -305,7 +266,7 @@ const ColorButton = (props: { vegeArg: T_Vegetable, year: number }) => {
   }
 }
 
-const VegetableView = (props: { vegeArg: T_Vegetable, year: number }) => {
+const VegetableView = (props: { vegeArg: T_Vegetable, isSelected: boolean, selectMe: (myName: string) => void }) => {
   const [isExpanded, setExpanded] = useState(false);
   const vege = props.vegeArg;
   let bgColor;
@@ -349,7 +310,7 @@ const VegetableView = (props: { vegeArg: T_Vegetable, year: number }) => {
             <Text>{vege.name}</Text>
             <Text>{vege.family}</Text>
           </View>
-          <ColorButton vegeArg={vege} year={props.year} />
+          <ColorButton vege={vege} isSelected={props.isSelected} selectVegetable={props.selectMe} />
         </View>
       </Pressable >
       {isExpanded &&
@@ -362,11 +323,44 @@ const VegetableView = (props: { vegeArg: T_Vegetable, year: number }) => {
 }
 
 const Selection = () => {
-  const currentYear = new Date().getFullYear();
-  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedVegetables, setSelected] = useState<Array<string>>([]);
+
+  const loadJSON = async () => {
+    //AsyncStorage.clear();
+    console.log("load " + selectedYear);
+    const selectedJSON = await AsyncStorage.getItem(getSelectedVegetablesKey(selectedYear));
+    if (selectedJSON !== null) {
+      setSelected(JSON.parse(selectedJSON)["selected"]);
+      console.log("loaded: " + JSON.parse(selectedJSON)["selected"]);
+    }
+  }
+
+  useEffect(() => {
+    const initSelected = async () => {
+      console.log("useeffect/" + selectedYear);
+      await loadJSON();
+    }
+
+    initSelected();
+  }, [selectedYear]);
+
+  const updateSelectedVegetables = async (vegetableName: string) => {
+    const updatedSelected = [...selectedVegetables];
+    if (!selectedVegetables.includes(vegetableName)) {
+      console.log("add: " + vegetableName);
+      updatedSelected.push(vegetableName);
+    } else {
+      console.log("remove: " + vegetableName);
+      updatedSelected.splice(updatedSelected.indexOf(vegetableName), 1);
+    }
+    setSelected(updatedSelected);
+    await AsyncStorage.setItem(getSelectedVegetablesKey(selectedYear), JSON.stringify({ "selected": updatedSelected }));
+    console.log("selected: " + selectedVegetables);
+  }
 
   const renderItem = ({ item }: { item: T_Vegetable }) => (
-    <VegetableView vegeArg={item} year={selectedYear} />
+    <VegetableView vegeArg={item} isSelected={selectedVegetables.includes(item.name)} selectMe={updateSelectedVegetables} />
   );
 
   return (
